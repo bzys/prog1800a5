@@ -1,0 +1,15 @@
+body  {
+  font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif;
+  width: 800px;
+  background-color: white;
+  margin: 50px auto;
+  padding: 0;
+}
+#table {
+  padding: auto;
+  margin: auto;
+  width: 90%;
+}
+#table input{
+  width: 98%;
+}

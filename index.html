@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<!--
+	Author:		Bill Sun
+	Page Name:	index.html
+	Course:		PROG1800 
+	Due Date:	
+	Assignment:	Assignment 5
+	
+	Revision History:
+		
+-->
+<html lang="en">
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+	<script src="validation.js"></script>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<style>
+	</style>
+</head>
+<body>
+	<header>
+		<h3 style="text-align: center">Assignment 5 - Databases</h3>
+		<P>This webpage will allow the user to add new parts and vendors to the "assignment5.mdb" database.</P>
+		<hr>
+	</header>
+	<main>
+		<p>To add a new part to the database fill out the information below:</p>
+
+		<form action="parts.php" method="POST" onsubmit="return continueOrNot()">
+			<table id="table">
+				<tr>
+					<td>Vendor Number*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text" id="vendorNo1" name="vendorNo1"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Part Description*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text" id="partDesc" name="partDesc"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Quantity On-Hand*</td>
+					<td>Quantity On-Order*</td>
+				</tr>
+				<tr>
+					<td><input type="number" min="0" step="1" value="0" id="qtyOnHand" name="qtyOnHand"></td>
+					<td><input type="number" min="0" step="1" value="0" id="qtyOnOrder" name="qtyOnOrder"></td>
+				</tr>
+				<tr>
+					<td>Part Cost*</td>
+					<td>List Price*</td>
+				</tr>
+				<tr>
+					<td><input type="text" id="partCost" name="partCost"></td>
+					<td><input type="text" id="listPrice" name="listPrice"></td>
+				</tr>
+			</table>
+
+			<p style="font-size: .8em">Note: all fields marked with an asterisk (*) are required fields.</p>
+			<p id="partErrMsg" style="font-size: .8em; color: orangered"><br></p>
+
+			<input type="submit" id="buttonAddPart" value="Add Part" onclick="checkPart()">
+		</form>
+		<br>
+		<hr>
+
+		<p>To add a new vendor to the database fill out the information below:</p>
+		<form action="vendors.php" method="POST" onsubmit="return continueOrNot()">
+			<table id="table">
+				<tr>
+					<td>Vendor Number*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text" id="vendorNo2" name="vendorNo2"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Vendor Name*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text" id="vendorName" name="vendorName"></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>Vendor Address 1*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" id="address1" name="address1"></td>
+				</tr>
+				<tr>
+					<td>Vendor Address 2</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" id="address2" name="address2"></td>
+				</tr>
+				<tr>
+					<td>Vendor City*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td colspan="2"><input type="text" id="city" name="city"></td>
+				</tr>
+				<tr>
+					<td>Vendor Postal Code*</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td><input type="text" id="postalCode" name="postalCode"></td>					
+					<td></td>
+				</tr>
+				<tr>
+					<td>Vendor Province*</td>
+					<td>Vendor Country*</td>
+				</tr>
+				<tr>
+					<td><input type="text" id="province" name="province"></td>					
+					<td><input type="text" id="country" name="country"></td>
+				</tr>
+				<tr>
+					<td>Vendor Phone Number*</td>
+					<td>Vendor Fax Number</td>
+				</tr>
+				<tr>
+					<td><input type="text" id="phoneNum" name="phoneNum"></td>					
+					<td><input type="text" id="faxNum" name="faxNum"></td>
+				</tr>
+			</table>
+
+			<p style="font-size: .8em">Note: all fields marked with an asterisk (*) are required fields.</p>
+			<p id="vendorErrMsg" style="font-size: .8em; color: orangered"><br></p>
+
+
+			<input type="submit" id="buttonAddVendor" value="Add Vendor" onclick="checkVendor()">
+		</form>
+		<br>
+		<hr>
+
+		<form action="parameter.php" method="POST" onsubmit="return continueOrNot()">
+				<table id="table">
+					<tr>
+						<td>Query Filter (leave blank for all info)</td>
+						<td>Query Columns*</td>
+					</tr>
+					<tr>
+						<td><input type="text" id="queryInfo" name="queryInfo"></td>
+						<td>
+							<select name="queryField" id="queryField" style="width: 100%; height: 1.6em">
+								<option value="default" selected="selected">Please select a query field</option>
+								<option value="pVendorNoDescription">Parts - VendorNo & Description</option>
+								<option value="partIDDescription">Parts - PartID & Description</option>
+								<option value="vVendorNoName">Vendors - VendorNo & VendorName</option>
+								<option value="nameAddress">Vendors - Name & Address</option>
+								<option value="nameContact">Vendors - Name & Contact Info</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+	
+				<p style="font-size: .8em">Note: all fields marked with an asterisk (*) are required fields.</p>
+				<p id="queryErrMsg" style="font-size: .8em; color: orangered"><br></p>
+	
+				<input type="submit" id="buttonParamQuery" value="Submit Query" onclick="checkQuery()">
+			</form>
+	</main>
+	<footer>
+		<br>
+		<hr>
+		<p style="text-align: right">PROG1800: Programming Dynamic Websites<br>Bill Sun<br>Assignment 5<br>Due: August 9<sup>th</sup>, 2018</p>
+	</footer>
+</body>
+</html>
